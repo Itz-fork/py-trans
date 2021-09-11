@@ -3,4 +3,5 @@
 
 from .translator import PyTranslator
 
+# Version
 __version__ = "v0.2"
