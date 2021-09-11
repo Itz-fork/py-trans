@@ -9,7 +9,7 @@ For now py-trans supported for two translate engines (providers)
 ## Installation
 **Install from source**
 ```
-pip install git+https://github.com/Itz-fork/py-translate.git
+pip install git+https://github.com/Itz-fork/py-trans.git
 ```
 
 ## Usage
