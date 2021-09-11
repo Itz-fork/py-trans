@@ -24,7 +24,7 @@ else:
 
 
 setup(name='py_trans',
-version='0.1',
+version='0.2',
 description='Free python library to translate text to different languages.',
 url='https://github.com/Itz-fork/py-trans',
 author='Itz-fork',
