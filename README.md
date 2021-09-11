@@ -5,8 +5,13 @@ Free Python library for translate text into different languages.
 For now py-trans supported for two translate engines (providers)
 - [Google Translate](https://translate.google.com/) - "google"
 - [LibreTranslate](https://libretranslate.com/) - "libre"
+- [translate.com](https://www.translate.com/) - "translate.com"
 
 ## Installation
+**Install from pypi**
+```
+pip3 install py-trans
+```
 **Install from source**
 ```
 pip install git+https://github.com/Itz-fork/py-trans.git
