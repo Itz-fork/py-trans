@@ -1,6 +1,6 @@
 # Copyright (c) 2021 - Itz-fork
-# Project: py_translate
+# Project: py_trans
 
 from .translator import PyTranslator
 
-__version__ = "v0.1"
+__version__ = "v0.2"
