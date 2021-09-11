@@ -23,7 +23,7 @@ else:
   big_description = "py_trans is a free python library to translate text to different languages."
 
 
-setup(name='py_trans',
+setup(name='py-trans',
 version='0.2',
 description='Free python library to translate text to different languages.',
 url='https://github.com/Itz-fork/py-trans',
