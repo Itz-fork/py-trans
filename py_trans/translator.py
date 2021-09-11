@@ -1,4 +1,4 @@
-# Project: py-translator
+# Project: py-trans
 # Author: itz-fork
 import requests
 
@@ -12,6 +12,7 @@ class PyTranslator:
     Providers:
         google - Google Translate
         bing - Bing Translate
+        translate.com - translate.com Translate
 
     Argument(s):
         provider - Provider of Translator. (Must be a supported provider)
@@ -20,7 +21,7 @@ class PyTranslator:
         pytranslator = PyTranslator(provider="google")
     """
     def __init__(self, provider="google"):
-        self.providers = ["google", "libre"]
+        self.providers = ["google", "libre", "translate.com"]
         if provider in self.providers:
             self.provider = provider
         else:
@@ -44,6 +45,8 @@ class PyTranslator:
             return self.google_translate(text, dest_lang)
         elif self.provider == "libre":
             return self.libre_translate(text, dest_lang)
+        elif self.provider == "translate.com":
+            return self.translate_com(text, dest_lang)
         else:
             return
     
@@ -71,6 +74,16 @@ class PyTranslator:
             r_url = requests.post("https://libretranslate.com/translate", data={"q": str(text), "source": origin_lang, "target": dest_lang}, headers=self.lheader).json()
             translation = r_url["translatedText"]
             tr_dict = {"status": "success", "engine": "libre", "translation": translation, "dest_lang": dest_lang, "orgin_text": str(text), "origin_lang": origin_lang}
+            return tr_dict
+        except Exception as e:
+            return {"status": "failed", "error": e}
+    
+    # Translate.com
+    def translate_com(self, text, dest_lang):
+        try:
+            r_url = requests.post("https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(text), "translated_lang": dest_lang}).json()
+            translation = r_url["translated_text"]
+            tr_dict = {"status": "success", "engine": "translate.com", "translation": translation, "dest_lang": dest_lang, "orgin_text": str(text), "origin_lang": "Not supported by engine"}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
