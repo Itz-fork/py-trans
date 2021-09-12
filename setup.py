@@ -1,12 +1,10 @@
 # Copyright (c) 2021 - Itz-fork
-# Project: py-translate
+# Project: py-trans
 import os
 from setuptools import setup, find_packages
 
-# Allow Exec. from any path (Credits: mega.py)
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-# Getting the requirements
 if os.path.isfile('requirements.txt'):
   with open('requirements.txt') as req:
     reques = req.read().splitlines()
@@ -15,7 +13,6 @@ else:
     'requests'
   ]
 
-# Getting the long description
 if os.path.isfile('README.md'):
   with open(('README.md'), encoding='utf-8') as readmeh:
     big_description = readmeh.read()
@@ -31,7 +28,7 @@ author='Itz-fork',
 author_email='itz-fork@users.noreply.github.com',
 license='MIT',
 packages=find_packages(),
-download_url="https://github.com/Itz-fork/py-trans/archive/refs/tags/py-trans-pypi.tar.gz",
+download_url="https://github.com/Itz-fork/py-trans/releases/tag/py-trans-pypi-v0.3",
 keywords=['python', 'translator', 'py-trans'],
 long_description=big_description,
 long_description_content_type='text/markdown',
