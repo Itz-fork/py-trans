@@ -1,13 +1,12 @@
 # py-trans
 Free Python library for translate text into different languages.
 
-## Supported Engines
 
-For now py-trans supported for four translate engines (providers)
-- [Google Translate](https://translate.google.com/) - "google"
-- [LibreTranslate](https://libretranslate.com/) - "libre"
-- [translate.com](https://www.translate.com/) - "translate.com"
-- [MyMemory](https://mymemory.translated.net/) - "my_memory"
+# Features
+- Simple & Easy to use
+- Different Translate Engines to choose
+- Automatic Language Detection
+
 
 ## Installation
 
@@ -19,3 +18,12 @@ pip3 install py-trans
 ```
 pip install git+https://github.com/Itz-fork/py-trans.git
 ```
+
+
+## Supported Engines ⚙️
+
+For now py-trans supported for four translate engines (providers)
+- [Google Translate](https://translate.google.com/) - "google"
+- [LibreTranslate](https://libretranslate.com/) - "libre"
+- [translate.com](https://www.translate.com/) - "translate.com"
+- [MyMemory](https://mymemory.translated.net/) - "my_memory"
