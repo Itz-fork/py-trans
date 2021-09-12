@@ -11,7 +11,7 @@ class PyTranslator:
     
     Providers:
         google - Google Translate
-        bing - Bing Translate
+        libre - LibreTranslate Engine
         translate.com - translate.com Translate
         my_memory - MyMemory Translate
 
