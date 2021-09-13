@@ -1,3 +1,7 @@
-- Getting Started
-  - [Py-Trans](docs/main_page.md)
+- Getting started
+
+  - [Quick start](docs/main_page.md)
+
+- Usage
+
   - [Usage](docs/usage.md)
