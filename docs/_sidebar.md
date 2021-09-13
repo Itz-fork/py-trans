@@ -1,6 +1,7 @@
 - Getting started
 
-  - [Quick start](main_page.md)
+  - [What is this?](main_page.md)
+  - [Installation](quick-start/installation.md)
 
 - Usage
 
