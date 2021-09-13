@@ -20,7 +20,7 @@ pip install git+https://github.com/Itz-fork/py-trans.git
 ```
 
 
-## Supported Engines ⚙️
+# Supported Engines ⚙️
 
 For now py-trans supported for four translate engines (providers)
 - [Google Translate](https://translate.google.com/) - "google"
