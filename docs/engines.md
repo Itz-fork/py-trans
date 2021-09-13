@@ -11,6 +11,7 @@ For now py-trans supported for four translate engines (providers)
 
 
 **Use `Engine Code` to choose Translation Engine while creating instance of py_trans.**
+</br>
 Ex:-
 ```python
 py_t = PyTranslator(provider="google")
