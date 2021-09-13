@@ -32,7 +32,10 @@
           buttonText : 'Copy',
           errorText  : 'Error',
           successText: 'Copied!'
-        }
+        },
+	plugins: [
+          EditOnGithubPlugin.create('https://github.com/njleonzhang/vue-data-tables/blob/master/docs/')
+	]
       };
 </script>
 	<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
