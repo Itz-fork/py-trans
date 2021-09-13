@@ -21,3 +21,21 @@ Now everything is done. So now you use this module 🤐. For a example If you wa
 # es = Language code of spanish
 print(x.translate("Hi", "es"))
 ```
+
+</br>
+
+**If you followed all steps, Your code will looks like this,**
+```python
+# Step 1
+from py_trans import PyTranslator
+
+# Step 2
+py_t = PyTranslator(provider="google")
+
+# Step 3
+print(x.translate("Hi", "es"))
+```
+
+</br>
+
+#### Need more examples? Take a look at [this page](examples.md)
