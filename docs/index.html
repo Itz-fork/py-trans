@@ -36,6 +36,16 @@
         },
 	plugins: [
 	  EditOnGithubPlugin.create('https://github.com/Itz-fork/py-trans/blob/docs/docs/', 'https://github.com/Itz-fork/py-trans/edit/docs/docs/', '✍️ Edit on Github')
+	  function(hook) {
+	    var footer = [
+	      '<footer style="text-align: center;margin-top: 48px;">',
+	      '<span> Made with ❤️ by <a href="https://github.com/Itz-fork target="_blank">Itz-fork</a>',
+	      '</footer>'
+	    ].join('');
+	    hook.afterEach(function(html) {
+	      return html + footer;
+	    });
+	  }
 	],
       };
     </script>
