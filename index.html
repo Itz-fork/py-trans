@@ -12,10 +12,13 @@
     <script>
 	window.$docsify = {
 		homepage: 'docs/main_page.md',
-		loadSidebar: true
+		loadSidebar: true,
+		<!-- Search Bar ---!>
+		search: 'auto'
         };
 </script>
-	<script src="//unpkg.com/docsify/lib/docsify.min.js">
+	<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+	<script src="//polyfill.io/v3/polyfill.min.js?features=String.prototype.normalize"></script>
 	<script src="//cdn.jsdelivr.net/npm/prismjs@1.24.1/components/prism-python.min.js"></script>
 	</script>
 </body>
