@@ -1,6 +1,7 @@
-# Usage
-Well, Usage of this module is very simple. For a example take a look at below code 👇,
+# Examples,
 
+## Basic Usage
+***Input***
 ```python
 from py_trans import PyTranslator
 
@@ -11,4 +12,3 @@ x = PyTranslator(provider="google")
 print(x.translate("Hi", "si"))
 ```
 
-Above code will translate "Hi" into "Sinhala" and returns output as a dict.
