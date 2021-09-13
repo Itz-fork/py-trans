@@ -2,5 +2,5 @@
   "name": "py-trans-docs",
   "version": "1.0.0",
   "description": "Documentation of py-trans",
-  "main": "index.html"
+  "main": "docs/index.html"
 }
