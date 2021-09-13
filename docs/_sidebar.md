@@ -1,7 +1,7 @@
 - Getting started
 
-  - [Quick start](docs/main_page.md)
+  - [Quick start](main_page.md)
 
 - Usage
 
-  - [Usage](docs/usage.md)
+  - [Usage](usage.md)
