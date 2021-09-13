@@ -5,3 +5,4 @@
 - Usage
 
   - [Usage](usage.md)
+  - [Examples](examples.md)
