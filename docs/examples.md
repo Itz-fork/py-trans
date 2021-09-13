@@ -38,7 +38,7 @@ en
 ```python
 from py_trans import PyTranslator
 
-py_t = PyTranslator(provider="google")
+py_t = PyTranslator()
 
 print(py_t._detect_lang("Hi"))
 ```
