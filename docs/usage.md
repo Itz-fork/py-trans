@@ -19,7 +19,7 @@ py_t = PyTranslator(provider="google")
 Now everything is done. So now you use this module 🤐. For a example If you want to translate "`Hi`" to "`Spanish`" do something like this,
 ```python
 # es = Language code of spanish
-print(x.translate("Hi", "es"))
+print(py_t.translate("Hi", "es"))
 ```
 
 </br>
@@ -33,7 +33,7 @@ from py_trans import PyTranslator
 py_t = PyTranslator(provider="google")
 
 # Step 3
-print(x.translate("Hi", "es"))
+print(py_t.translate("Hi", "es"))
 ```
 
 </br>
