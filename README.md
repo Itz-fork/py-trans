@@ -32,9 +32,4 @@ print(x.translate("Hi", "si"))
 ```
 
 ## Docs
-For now there is no documentation, but still you can get some help using Docstrings. Use below code for it.
-```python
-from py_trans import PyTranslator
-
-print(help(PyTranslator.translate))
-```
+Here is the [Documentation](https://itz-fork.github.io/py-trans/) of py-trans
