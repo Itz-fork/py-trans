@@ -38,4 +38,4 @@ print(x.translate("Hi", "es"))
 
 </br>
 
-#### Need more examples? Take a look at [this page](examples.md)
+#### Need more examples? Take a look at  [this page](examples.md)
