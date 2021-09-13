@@ -1,0 +1,3 @@
+- Getting Started
+  - [Py-Trans](docs/main_page.md)
+  - [Usage](docs/usage.md)
