@@ -8,7 +8,8 @@
     <title>Py-Trans Docs</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">Hang On...</div>
+    <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
     <script>
       window.$docsify = {
 	repo: 'Itz-fork/py-trans',
@@ -34,12 +35,10 @@
           successText: 'Copied!'
         },
 	plugins: [
-	  EditOnGithubPlugin.create(
-	    "https://github.com/Itz-fork/py-trans/blob/docs/docs/"
-	  )
-	]
+	  EditOnGithubPlugin.create('https://github.com/Itz-fork/py-trans/blob/docs/docs/')
+	],
       };
-</script>
+    </script>
 	<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/prismjs@1.24.1/components/prism-python.min.js"></script>
