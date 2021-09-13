@@ -15,7 +15,7 @@ If you need to choose the translation engine do something like this (For list of
 py_t = PyTranslator(provider="google")
 ```
 
-**3. Let's translate**
+**3. Let's translate** </br>
 Now everything is done. So now you use this module 🤐. For a example If you want to translate "`Hi`" to "`Spanish`" do something like this,
 ```python
 # es = Language code of spanish
