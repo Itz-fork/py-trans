@@ -89,7 +89,7 @@ class PyTranslator:
             r_url = requests.post("https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(text), "translated_lang": dest_lang}).json()
             translation = r_url["translated_text"]
             origin_lang = get_lang_name(text)
-            tr_dict = {"status": "success", "engine": "translate.com", "translation": translation, "dest_lang": dest_lang, "orgin_text": origin_lang, "origin_lang": "Not supported by engine"}
+            tr_dict = {"status": "success", "engine": "translate.com", "translation": translation, "dest_lang": dest_lang, "orgin_text": origin_lang, "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
