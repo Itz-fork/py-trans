@@ -148,13 +148,6 @@ LANGUAGE_CODES = {
 }
 
 
-# Get Language Names
-def get_lang_name(text):
-    if len(text) == 2:
-        return _get_full_lang_name(text)
-    else:
-        return _get_lang_code(text)
-
 def _get_full_lang_name(text):
     try:
         lang_name = LANGUAGE_CODES.get(text)

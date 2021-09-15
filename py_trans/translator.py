@@ -1,7 +1,7 @@
 # Project: py-trans
 # Author: itz-fork
 import requests
-from .language_codes import get_lang_name
+from .language_codes import _get_full_lang_name, _get_lang_code
 
 class PyTranslator:
     """
@@ -61,8 +61,9 @@ class PyTranslator:
             request_resp = requests.get(r_url, headers=self.gheader).json()
             translation = request_resp['sentences'][0]['trans']
             origin_text = request_resp['sentences'][0]['orig']
-            origin_lang = get_lang_name(request_resp['src'])
-            tr_dict = {"status": "success", "engine": "google", "translation": translation, "dest_lang": dest_lang, "orgin_text": origin_text, "origin_lang": origin_lang}
+            origin_lang = self.get_lang_name(request_resp['src'])
+            dest_lang_f = self.get_lang_name(dest_lang)
+            tr_dict = {"status": "success", "engine": "google", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_text, "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
@@ -77,8 +78,9 @@ class PyTranslator:
             source_lang = self._detect_lang(text=text)
             r_url = requests.post("https://libretranslate.com/translate", data={"q": str(text), "source": source_lang, "target": dest_lang}, headers=self.lheader).json()
             translation = r_url["translatedText"]
-            origin_lang = get_lang_name(source_lang)
-            tr_dict = {"status": "success", "engine": "libre", "translation": translation, "dest_lang": dest_lang, "orgin_text": str(text), "origin_lang": origin_lang}
+            origin_lang = self.get_lang_name(source_lang)
+            dest_lang_f = self.et_lang_name(dest_lang)
+            tr_dict = {"status": "success", "engine": "libre", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
@@ -88,8 +90,9 @@ class PyTranslator:
         try:
             r_url = requests.post("https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(text), "translated_lang": dest_lang}).json()
             translation = r_url["translated_text"]
-            origin_lang = get_lang_name(text)
-            tr_dict = {"status": "success", "engine": "translate.com", "translation": translation, "dest_lang": dest_lang, "orgin_text": origin_lang, "origin_lang": origin_lang}
+            origin_lang = self.get_lang_name(text)
+            dest_lang_f = self.get_lang_name(dest_lang)
+            tr_dict = {"status": "success", "engine": "translate.com", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_lang, "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
@@ -100,8 +103,16 @@ class PyTranslator:
             source_lang = self._detect_lang(text=text)
             r_url = requests.get("https://api.mymemory.translated.net/get", params={"q": text, "langpair": f"{source_lang}|{dest_lang}"}).json()
             translation = r_url["matches"][0]["translation"]
-            origin_lang = get_lang_name(source_lang)
-            tr_dict = {"status": "success", "engine": "my_memory", "translation": translation, "dest_lang": dest_lang, "orgin_text": str(text), "origin_lang": origin_lang}
+            origin_lang = self.get_lang_name(source_lang)
+            dest_lang_f = self.get_lang_name(dest_lang)
+            tr_dict = {"status": "success", "engine": "my_memory", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
+    
+    # Get Language Names
+    def get_lang_name(self, text):
+        if len(text) == 2:
+            return _get_full_lang_name(text)
+        else:
+            return _get_lang_code(text)
