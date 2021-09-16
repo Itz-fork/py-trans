@@ -7,5 +7,6 @@
 
 - Usage
 
+  - [Functions](functions.md)
   - [Usage](usage.md)
   - [Examples](examples.md)
