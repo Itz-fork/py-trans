@@ -24,6 +24,7 @@ Example: [Click here](examples.md#detect-source-language)
 Using this function you can get **Full language name by it's [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code** or **[ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) language code by it'ls full name**. There are over 140+ language codes for now.
 **Arguments,**
   - `text` - If you want to get **Full language name** then pass the language code. else if you need to get **Language code** then pass full language name. For the language list [Click here](https://github.com/Itz-fork/py-trans/blob/main/py_trans/language_codes.py#L5-L148)
+  - `full_name` - Set this to `True` if you need full form ablong-side with language code. Defaults to `False`
 
 Output will return as a string. </br>
 Example: [Click here](examples.md#get-language-name)
