@@ -69,17 +69,24 @@ class PyTranslator:
             return {"status": "failed", "error": e}
     
     # LibreTranslate
-    def _detect_lang(self, text):
-        r_url = requests.post("https://libretranslate.com/detect", data={"q": str(text)}, headers=self.lheader).json()
-        return r_url[0]["language"]
+    def _detect_lang(self, text, full_name=False):
+        try:
+            r_url = requests.post("https://libretranslate.com/detect", data={"q": str(text)}, headers=self.lheader).json()
+            language_code = r_url[0]["language"]
+        except:
+            language_code = "en"
+        if full_name is False:
+            return language_code
+        else:
+            return self.get_lang_name(language_code)
     
     def libre_translate(self, text, dest_lang):
         try:
-            source_lang = self._detect_lang(text=text)
+            source_lang = self._detect_lang(text=text, full_name=False)
             r_url = requests.post("https://libretranslate.com/translate", data={"q": str(text), "source": source_lang, "target": dest_lang}, headers=self.lheader).json()
             translation = r_url["translatedText"]
             origin_lang = self.get_lang_name(source_lang)
-            dest_lang_f = self.et_lang_name(dest_lang)
+            dest_lang_f = self.get_lang_name(dest_lang)
             tr_dict = {"status": "success", "engine": "libre", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
@@ -100,7 +107,7 @@ class PyTranslator:
     # My Memory
     def my_memory(self, text, dest_lang):
         try:
-            source_lang = self._detect_lang(text=text)
+            source_lang = self._detect_lang(text=text, full_name=False)
             r_url = requests.get("https://api.mymemory.translated.net/get", params={"q": text, "langpair": f"{source_lang}|{dest_lang}"}).json()
             translation = r_url["matches"][0]["translation"]
             origin_lang = self.get_lang_name(source_lang)

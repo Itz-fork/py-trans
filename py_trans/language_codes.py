@@ -97,7 +97,7 @@ LANGUAGE_CODES = {
     "ps": "Pashto",
     "pt": "Portuguese",
     "qu": "Quechua",
-    "rm": "	Rhaeto-Romance",
+    "rm": "Rhaeto-Romance",
     "rn": "Kirundi",
     "ro": "Romanian",
     "ru": "Russian",
