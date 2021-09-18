@@ -8,6 +8,7 @@ For now py-trans supported for four translate engines (providers)
 |[LibreTranslate](https://libretranslate.com/)     | `libre`         |
 |[translate.com](https://www.translate.com/)       | `translate.com` |
 |[MyMemory](https://mymemory.translated.net/)      | `my_memory`     |
+|[Translate Dict](https://www.translatedict.com/)  | `translate_dict` |
 
 
 **Use `Engine Code` to choose Translation Engine while creating instance of py_trans.**
