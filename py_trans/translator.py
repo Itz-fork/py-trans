@@ -15,6 +15,7 @@ class PyTranslator:
         libre - LibreTranslate Engine
         translate.com - translate.com Translate
         my_memory - MyMemory Translate
+        translate_dict - Translate Dict
 
     Argument(s):
         provider - Provider of Translator. (Must be a supported provider)
@@ -23,7 +24,7 @@ class PyTranslator:
         pytranslator = PyTranslator(provider="google")
     """
     def __init__(self, provider="google"):
-        self.providers = ["google", "libre", "translate.com", "my_memory"]
+        self.providers = ["google", "libre", "translate.com", "my_memory", "translate_dict"]
         if provider in self.providers:
             self.provider = provider
         else:
@@ -51,6 +52,8 @@ class PyTranslator:
             return self.translate_com(text, dest_lang)
         elif self.provider == "my_memory":
             return self.my_memory(text, dest_lang)
+        elif self.provider == "translate_dict":
+            return self.translate_dict(text, dest_lang)
         else:
             return
     
@@ -74,6 +77,7 @@ class PyTranslator:
             r_url = requests.post("https://libretranslate.com/detect", data={"q": str(text)}, headers=self.lheader).json()
             language_code = r_url[0]["language"]
         except:
+            # If can't detect the language let's think it's just english (RIP moment)
             language_code = "en"
         if full_name is False:
             return language_code
@@ -117,9 +121,23 @@ class PyTranslator:
         except Exception as e:
             return {"status": "failed", "error": e}
     
+    # Translate Dict
+    def translate_dict(self, text, dest_lang):
+        try:
+            r_url = requests.get(f"https://t3.translatedict.com/1.php?p1=auto&p2={dest_lang}&p3={text}").text
+            origin_lang = self._detect_lang(text=text, full_name=True)
+            dest_lang_f = self.get_lang_name(dest_lang)
+            tr_dict = {"status": "success", "engine": "Translate Dict", "translation": r_url, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
+            return tr_dict
+        except Exception as e:
+            return {"status": "failed", "error": e}
+    
     # Get Language Names
     def get_lang_name(self, text):
         if len(text) == 2:
             return _get_full_lang_name(text)
         else:
-            return _get_lang_code(text)
+            if len(text) <= 3:
+                return "Not a full language name"
+            else:
+                return _get_lang_code(text)

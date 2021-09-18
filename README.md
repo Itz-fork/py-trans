@@ -2,27 +2,30 @@
 ```python
 from py_trans import PyTranslator
 
-x = PyTranslator(provider="google")
+x = PyTranslator()
 print(x.translate("Hi", "si"))
 ```
 
 **py-trans**  is a Free Python library for translate text into different languages.
 
 ## Supported Engines
-For now py-trans supported for four translate engines (providers)
+For now py-trans supported for 5 translate engines (providers)
 |                      Engine                      |   Engine Code   |
 | ------------------------------------------------ | --------------- |
 |[Google Translate](https://translate.google.com/) | `google`        |
 |[LibreTranslate](https://libretranslate.com/)     | `libre`         |
 |[translate.com](https://www.translate.com/)       | `translate.com` |
 |[MyMemory](https://mymemory.translated.net/)      | `my_memory`     |
+|[Translate Dict](https://www.translatedict.com/)  | `translate_dict`     |
 
 ## Installation
 **Install from pypi**
+
 ```
 pip3 install py-trans
 ```
 **Install from source**
+
 If you want to try out latest features then install py-trans from the [source](https://github.com/Itz-fork/py-trans).
 ```
 pip install git+https://github.com/Itz-fork/py-trans.git
