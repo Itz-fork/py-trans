@@ -1,12 +1,21 @@
 # py-trans
-Free Python library for translate text into different languages.
+```python
+from py_trans import PyTranslator
+
+x = PyTranslator(provider="google")
+print(x.translate("Hi", "si"))
+```
+
+**py-trans**  is a Free Python library for translate text into different languages.
 
 ## Supported Engines
 For now py-trans supported for four translate engines (providers)
-- [Google Translate](https://translate.google.com/) - "google"
-- [LibreTranslate](https://libretranslate.com/) - "libre"
-- [translate.com](https://www.translate.com/) - "translate.com"
-- [MyMemory](https://mymemory.translated.net/) - "my_memory"
+|                      Engine                      |   Engine Code   |
+| ------------------------------------------------ | --------------- |
+|[Google Translate](https://translate.google.com/) | `google`        |
+|[LibreTranslate](https://libretranslate.com/)     | `libre`         |
+|[translate.com](https://www.translate.com/)       | `translate.com` |
+|[MyMemory](https://mymemory.translated.net/)      | `my_memory`     |
 
 ## Installation
 **Install from pypi**
@@ -14,22 +23,21 @@ For now py-trans supported for four translate engines (providers)
 pip3 install py-trans
 ```
 **Install from source**
+If you want to try out latest features then install py-trans from the [source](https://github.com/Itz-fork/py-trans).
 ```
 pip install git+https://github.com/Itz-fork/py-trans.git
 ```
-
-## Usage
-Example code snippet to use py-trans
-
-```python
-from py_trans import PyTranslator
-
-# Create an instance of py_trans
-# Choose Provider if you want, default one is google. (There are 4 providers for now)
-x = PyTranslator(provider="google")
-
-print(x.translate("Hi", "si"))
+If you want to check whether it's successfully installed or not just run the following command in your terminal. This will print out the current version of [py-trans](https://github.com/Itz-fork/py-trans). So you can use this to check the version also.
+```bash
+echo 'from py_trans import __version__ as v; print(v)' | python3
 ```
 
 ## Docs
-Here is the [Documentation](https://itz-fork.github.io/py-trans/) of py-trans
+> "Stop it, Get some help"
+>
+If you want more information about usage of thsi module or need some examples to get started, just read the docs of py-trans - [Click here](https://itz-fork.github.io/py-trans/)
+
+## License & Copyright
+- **[py-trans](https://github.com/Itz-fork/py-trans) is licensed under [MIT License](https://github.com/Itz-fork/py-trans/blob/main/LICENSE)**
+
+- **Copyright (c) 2021 Itz-fork**

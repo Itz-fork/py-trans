@@ -1,5 +1,5 @@
 # Project: py-trans
-# Author: itz-fork
+# Author: Itz-fork
 import requests
 from .language_codes import _get_full_lang_name, _get_lang_code
 
@@ -63,7 +63,7 @@ class PyTranslator:
             origin_text = request_resp['sentences'][0]['orig']
             origin_lang = self.get_lang_name(request_resp['src'])
             dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "google", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_text, "origin_lang": origin_lang}
+            tr_dict = {"status": "success", "engine": "Google Translate", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_text, "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
@@ -87,7 +87,7 @@ class PyTranslator:
             translation = r_url["translatedText"]
             origin_lang = self.get_lang_name(source_lang)
             dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "libre", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
+            tr_dict = {"status": "success", "engine": "LibreTranslate", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
@@ -99,7 +99,7 @@ class PyTranslator:
             translation = r_url["translated_text"]
             origin_lang = self.get_lang_name(text)
             dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "translate.com", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_lang, "origin_lang": origin_lang}
+            tr_dict = {"status": "success", "engine": "Translate.com", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_lang, "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
@@ -112,7 +112,7 @@ class PyTranslator:
             translation = r_url["matches"][0]["translation"]
             origin_lang = self.get_lang_name(source_lang)
             dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "my_memory", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
+            tr_dict = {"status": "success", "engine": "MyMemory", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
