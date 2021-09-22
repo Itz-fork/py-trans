@@ -8,6 +8,13 @@ print(x.translate("Hi", "si"))
 
 **py-trans**  is a Free Python library for translate text into different languages.
 
+## Features
+- Simple and Easy to use
+- Synchronous & Asynchronous
+- Different Translate Engines to choose
+
+***Less code, translate more***
+
 ## Supported Engines
 For now py-trans supported for 5 translate engines (providers)
 |                      Engine                      |   Engine Code   |

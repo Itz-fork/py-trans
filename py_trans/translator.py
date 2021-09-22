@@ -33,6 +33,7 @@ class PyTranslator:
         self.gheader = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         self.lheader = {"Origin": "https://libretranslate.com", "Host": "libretranslate.com", "Referer": "https://libretranslate.com/"}
 
+
     def translate(self, text, dest_lang="en"):
         """
         Translator Function
@@ -99,9 +100,10 @@ class PyTranslator:
     # Translate.com
     def translate_com(self, text, dest_lang):
         try:
-            r_url = requests.post("https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(text), "translated_lang": dest_lang}).json()
+            source_lang = self._detect_lang(text=text, full_name=False)
+            r_url = requests.post(url="https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(text), "source_lang": source_lang, "translated_lang": dest_lang, "use_cache_only": "false"}).json()
             translation = r_url["translated_text"]
-            origin_lang = self.get_lang_name(text)
+            origin_lang = self.get_lang_name(source_lang)
             dest_lang_f = self.get_lang_name(dest_lang)
             tr_dict = {"status": "success", "engine": "Translate.com", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_lang, "origin_lang": origin_lang}
             return tr_dict
