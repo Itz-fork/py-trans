@@ -1,6 +1,8 @@
 # Project: py-trans
 # Author: Itz-fork
 import requests
+
+from fake_useragent import UserAgent
 from .language_codes import _get_full_lang_name, _get_lang_code
 
 class PyTranslator:
@@ -24,13 +26,15 @@ class PyTranslator:
         pytranslator = PyTranslator(provider="google")
     """
     def __init__(self, provider="google"):
+        # Fake useragent client
+        tr_ua = UserAgent()
         self.providers = ["google", "libre", "translate.com", "my_memory", "translate_dict"]
         if provider in self.providers:
             self.provider = provider
         else:
             self.provider = "google"
         # Headers
-        self.gheader = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+        self.gheader = {"User-Agent": tr_ua.random}
         self.lheader = {"Origin": "https://libretranslate.com", "Host": "libretranslate.com", "Referer": "https://libretranslate.com/"}
 
 
