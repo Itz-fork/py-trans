@@ -8,3 +8,6 @@ The best feature of py-trans is you can choose which translation engine you want
 
 ### Automatic Language Detection
 py-trans can detect what is the language of source text. If you choose `google` as your translation engine it'll automatically detect the source language using Google's in-built language detect function. else it'll detect source language using [LibreTranslate](https://libretranslate.com/).
+
+### Sync and Async
+py-trans have both Sync and Async versions 😸
