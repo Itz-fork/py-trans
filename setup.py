@@ -3,8 +3,11 @@
 import os
 from setuptools import setup, find_packages
 
+# Things
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+pyt_version = 'v0.5'
 
+# Readme & Reqs
 if os.path.isfile('requirements.txt'):
   with open('requirements.txt') as req:
     reques = req.read().splitlines()
@@ -19,7 +22,7 @@ else:
 
 
 setup(name='py-trans',
-version='v0.5',
+version=pyt_version,
 description='Free python library to translate text to different languages.',
 url='https://github.com/Itz-fork/py-trans',
 author='Itz-fork',
