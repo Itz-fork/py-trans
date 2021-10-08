@@ -2,7 +2,6 @@
 # Project: py-trans
 import os
 from setuptools import setup, find_packages
-from py_trans import __version__ as pyt_version
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
@@ -20,7 +19,7 @@ else:
 
 
 setup(name='py-trans',
-version=pyt_version,
+version='v0.5',
 description='Free python library to translate text to different languages.',
 url='https://github.com/Itz-fork/py-trans',
 author='Itz-fork',
