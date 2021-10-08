@@ -10,7 +10,7 @@ if os.path.isfile('requirements.txt'):
   with open('requirements.txt') as req:
     reques = req.read().splitlines()
 else:
-  reques = ['requests', 'aiohttp', 'fake-useragent']
+  reques = ['requests==2.22.0', 'aiohttp==3.7.4.post0', 'fake_useragent==0.1.11']
 
 if os.path.isfile('README.md'):
   with open(('README.md'), encoding='utf-8') as readmeh:
