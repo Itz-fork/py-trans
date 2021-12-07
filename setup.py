@@ -5,7 +5,6 @@ from setuptools import setup, find_packages
 
 # Things
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
-pyt_version = 'v0.5'
 
 # Readme & Reqs
 if os.path.isfile('requirements.txt'):
@@ -20,6 +19,8 @@ if os.path.isfile('README.md'):
 else:
   big_description = "py_trans is a free python library to translate text to different languages."
 
+# py-trans version
+pyt_version = "v0.5.1"
 
 setup(name='py-trans',
 version=pyt_version,
