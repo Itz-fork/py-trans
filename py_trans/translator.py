@@ -4,6 +4,7 @@ import requests
 
 from fake_useragent import UserAgent
 from .language_codes import _get_full_lang_name, _get_lang_code
+from .errors import check_internet_connection, UnknownErrorOccurred
 
 class PyTranslator:
     """
@@ -26,6 +27,8 @@ class PyTranslator:
         pytranslator = PyTranslator(provider="google")
     """
     def __init__(self, provider="google"):
+        # Checking internet connection
+        check_internet_connection()
         # Fake useragent client
         tr_ua = UserAgent()
         self.providers = ["google", "libre", "translate.com", "my_memory", "translate_dict"]
@@ -67,8 +70,15 @@ class PyTranslator:
         r_url = f"https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl={dest_lang}&q={text}"
         try:
             request_resp = requests.get(r_url, headers=self.gheader).json()
-            translation = request_resp['sentences'][0]['trans']
-            origin_text = request_resp['sentences'][0]['orig']
+            translation = ""
+            for tr in request_resp["sentences"]:
+                try:
+                    translation += tr["trans"]
+                except KeyError:
+                    pass
+                except BaseException as e:
+                    raise UnknownErrorOccurred(e)
+            origin_text = text
             origin_lang = self.get_lang_name(request_resp['src'])
             dest_lang_f = self.get_lang_name(dest_lang)
             tr_dict = {"status": "success", "engine": "Google Translate", "translation": translation, "dest_lang": dest_lang_f, "orgin_text": origin_text, "origin_lang": origin_lang}
