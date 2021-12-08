@@ -1,9 +1,17 @@
 # Examples,
+
 Some code snippets to use [py-trans](https://github.com/Itz-fork/py-trans)
 
+> Note ⚠️
+>
+> In these examples we're using sync version. However async version is also the same. To know more take a look at [usage page](usage.md) for more info on it!
+
+
+
 ## Translation Example
-Function: []() </br>
-What example does?: Translate "`Hi`" to "`Spanish`" using "`google` translate engine.
+
+**Function:** [translate](functions.md#translate-translate) </br>
+**What example does?:** Translate "`Hi`" to "`Spanish`" using "`google` translate engine.
 
 ***Input***
 ```python
@@ -20,8 +28,9 @@ print(py_t.translate("Hi", "es"))
 
 
 ## Detect Source Language
-Function: []() </br>
-What example does?: Detecting source language using normal translation mode(1) and using libre language detect(2)
+
+**Function:** [_detect_lang_](functions.md#detect-source-language-_detect_lang) </br>
+**What example does?:** Detecting source language using normal translation mode(1) and using libre language detect(2)
 
    1. Using Translation Mode,
 ***Input***
@@ -53,8 +62,9 @@ en
 
 
 ## Get Language Name
-Function: []() </br>
-What example does?: Get full language name of language code `si`
+
+**Function:** [get_language_name](functions.md#get-language-name-get_lang_name) </br>
+**What example does?:** Get full language name of language code `si`
 
 ***Input***
 ```python
