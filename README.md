@@ -13,7 +13,7 @@ print(x.translate("Hi", "si"))
 - Synchronous & Asynchronous
 - Different Translate Engines to choose
 
-***Less code, translate more***
+***Code less, translate more!***
 
 ## Supported Engines
 For now py-trans supported for 5 translate engines (providers)
