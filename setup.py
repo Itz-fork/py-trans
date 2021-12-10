@@ -10,10 +10,9 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 # Readme & Reqs
 if os.path.isfile('requirements.txt'):
-    with open('requirements.txt') as req:
-        reques = req.read().splitlines()
+    reques = [r.strip() for r in open("requirements.txt").readlines()]
 else:
-    reques = ['requests', 'aiohttp', 'fake_useragent']
+    reques = ['requests', 'aiohttp', 'git+https://github.com/Itz-fork/fake-useragent.git']
 
 if os.path.isfile('README.md'):
     with open(('README.md'), encoding='utf-8') as readmeh:
