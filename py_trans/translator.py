@@ -29,15 +29,11 @@ class PyTranslator:
     def __init__(self, provider="google"):
         # Checking internet connection
         check_internet_connection()
-        # Fake useragent client
-        tr_ua = UserAgent()
         self.providers = ["google", "libre", "translate.com", "my_memory", "translate_dict"]
         if provider in self.providers:
             self.provider = provider
         else:
             self.provider = "google"
-        # Headers
-        self.gheader = {"User-Agent": tr_ua.random}
         self.lheader = {"Origin": "https://libretranslate.com", "Host": "libretranslate.com", "Referer": "https://libretranslate.com/"}
 
 
@@ -69,7 +65,7 @@ class PyTranslator:
     def google_translate(self, text, dest_lang):
         r_url = f"https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl={dest_lang}&q={text}"
         try:
-            request_resp = requests.get(r_url, headers=self.gheader).json()
+            request_resp = requests.get(r_url).json()
             translation = ""
             for tr in request_resp["sentences"]:
                 try:

@@ -1,3 +1,2 @@
 requests
 aiohttp
-fake-useragent @ git+https://github.com/Itz-fork/fake-useragent.git

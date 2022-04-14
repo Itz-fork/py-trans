@@ -2,7 +2,6 @@
 # Author: Itz-fork
 import aiohttp
 
-from fake_useragent import UserAgent
 from .language_codes import _get_full_lang_name, _get_lang_code
 from .errors import check_internet_connection, UnknownErrorOccurred
 
@@ -30,15 +29,12 @@ class Async_PyTranslator:
     def __init__(self, provider="google"):
         # Checking internet connection
         check_internet_connection()
-        # Fake useragent client
-        tr_ua = UserAgent()
         self.providers = ["google", "libre", "translate.com", "my_memory", "translate_dict"]
         if provider in self.providers:
             self.provider = provider
         else:
             self.provider = "google"
         # Headers
-        self.gheader = {"User-Agent": tr_ua.random}
         self.lheader = {"Origin": "https://libretranslate.com", "Host": "libretranslate.com", "Referer": "https://libretranslate.com/"}
         # aiohttp session for translation purpose
         self.t_session = aiohttp.ClientSession()
@@ -74,7 +70,7 @@ class Async_PyTranslator:
         r_url = f"https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl={dest_lang}&q={text}"
         try:
             async with self.t_session as tr_ses:
-                async with tr_ses.get(r_url, headers=self.gheader) as get_req:
+                async with tr_ses.get(r_url) as get_req:
                     request_resp = await get_req.json()
                     translation = ""
                     for tr in request_resp["sentences"]:
@@ -100,7 +96,7 @@ class Async_PyTranslator:
         ld_data = {"q": str(text)}
         try:
             async with self.d_session as tr_ses:
-                async with tr_ses.post(r_url, headers=self.lheader, data=ld_data) as get_req:
+                async with tr_ses.post(r_url, data=ld_data) as get_req:
                     request_resp = await get_req.json()
                     language_code = request_resp[0]["language"]
         except:
@@ -117,7 +113,7 @@ class Async_PyTranslator:
             source_lang = await self._detect_lang(text=text, full_name=False)
             l_data = {"q": str(text), "source": source_lang, "target": dest_lang}
             async with self.t_session as tr_ses:
-                async with tr_ses.post(r_url, headers=self.lheader, data=l_data) as get_req:
+                async with tr_ses.post(r_url, data=l_data) as get_req:
                     request_resp = await get_req.json()
                     translation = request_resp["translatedText"]
                     origin_lang = await self.get_lang_name(source_lang)
@@ -151,7 +147,7 @@ class Async_PyTranslator:
             source_lang = await self._detect_lang(text=text, full_name=False)
             m_params = {"q": text, "langpair": f"{source_lang}|{dest_lang}"}
             async with self.t_session as tr_ses:
-                async with tr_ses.get(r_url, headers=self.lheader, params=m_params) as get_req:
+                async with tr_ses.get(r_url, params=m_params) as get_req:
                     request_resp = await get_req.json()
                     translation = request_resp["matches"][0]["translation"]
                     origin_lang = await self.get_lang_name(source_lang)
