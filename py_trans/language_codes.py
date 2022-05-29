@@ -154,10 +154,12 @@ def _get_full_lang_name(text):
         return f"{lang_name} ({text})"
     except:
         return "Language Not Found!"
-    
+
+
 def _get_lang_code(text):
     try:
-        lang_code = list(LANGUAGE_CODES.keys())[list(LANGUAGE_CODES.values()).index(text)]
+        lang_code = list(LANGUAGE_CODES.keys())[
+            list(LANGUAGE_CODES.values()).index(text)]
         return f"{lang_code} ({text})"
     except:
         return "Language Not Found!"
