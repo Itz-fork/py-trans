@@ -20,7 +20,7 @@ For now py-trans supported for 5 translate engines (providers)
 |                      Engine                      |   Engine Code   |
 | ------------------------------------------------ | --------------- |
 |[Google Translate](https://translate.google.com/) | `google`        |
-|[LibreTranslate](https://libretranslate.com/)     | `libre`         |
+|~~[LibreTranslate](https://libretranslate.com/)~~     | ~~`libre`~~         |
 |[translate.com](https://www.translate.com/)       | `translate.com` |
 |[MyMemory](https://mymemory.translated.net/)      | `my_memory`     |
 |[Translate Dict](https://www.translatedict.com/)  | `translate_dict`     |
