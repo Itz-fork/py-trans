@@ -2,7 +2,6 @@
 # Author: Itz-fork
 import requests
 
-from fake_useragent import UserAgent
 from .language_codes import _get_full_lang_name, _get_lang_code
 from .errors import check_internet_connection, UnknownErrorOccurred, DeprecatedMethod
 
