@@ -62,7 +62,7 @@ class Async_PyTranslator:
 
     # Google Translate
     async def google_translate(self, text, dest_lang):
-        r_url = f"https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl={dest_lang}&q={text}"
+        r_url = f"https://clients5.google.com/translate_a/t?client=at&sl=auto&tl={dest_lang}&q={text}"
         try:
             async with ClientSession() as tr_ses:
                 async with tr_ses.get(r_url) as get_req:
