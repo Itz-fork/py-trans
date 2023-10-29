@@ -67,15 +67,14 @@ class PyTranslator:
 
     # Google Translate
     def google_translate(self, text, dest_lang):
-        r_url = f"https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=auto&tl={dest_lang}&q={text}"
+        r_url = f"https://clients5.google.com/translate_a/t?client=at&sl=auto&tl={dest_lang}&q={text}"
         try:
             resp = requests.get(r_url).json()[0]
             translation = resp[0]
-            origin_text = text
             origin_lang = self.get_lang_name(resp[1])
             dest_lang_f = self.get_lang_name(dest_lang)
             tr_dict = {"status": "success", "engine": "Google Translate", "translation": translation,
-                       "dest_lang": dest_lang_f, "orgin_text": origin_text, "origin_lang": origin_lang}
+                       "dest_lang": dest_lang_f, "orgin_text": text, "origin_lang": origin_lang}
             return tr_dict
         except Exception as e:
             return {"status": "failed", "error": e}
