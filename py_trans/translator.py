@@ -1,161 +1,120 @@
-# Project: py-trans
-# Author: Itz-fork
+# Author: https://github.com/Itz-fork
+# Project: https://github.com/Itz-fork/py-trans
+# License: MIT License
+
 import requests
 
-from .language_codes import _get_full_lang_name, _get_lang_code
-from .errors import check_internet_connection, UnknownErrorOccurred, DeprecatedMethod
+from errors import NoInternet, UnableToTranslate, UnknownError
 
 
 class PyTranslator:
     """
     PyTranslator Class
 
-    Note:
-        Before Trying to Translate Create an instance of this with provider (Default provider is google)
+    Methods:
 
-    Providers:
-        google - Google Translate
-        libre - LibreTranslate Engine
-        translate.com - translate.com Translate
-        my_memory - MyMemory Translate
-        translate_dict - Translate Dict
-
-    Argument(s):
-        provider - Provider of Translator. (Must be a supported provider)
-
-    Example(s):
-        pytranslator = PyTranslator(provider="google")
+        detect_lang: Detect language of the provided text
+        google: Translate text using Google Translate
+        translate_com: Translate text using Translate.com
+        my_memory: Translate text using My Memory
+        translate_dict: Translate text using Translate Dict
     """
-
-    def __init__(self, provider="google"):
-        # Checking internet connection
-        check_internet_connection()
-        self.providers = ["google", "libre",
-                          "translate.com", "my_memory", "translate_dict"]
-        if provider in self.providers:
-            self.provider = provider
-        else:
-            self.provider = "google"
-        self.lheader = {"Origin": "https://libretranslate.com",
-                        "Host": "libretranslate.com", "Referer": "https://libretranslate.com/"}
-
-    def translate(self, text, dest_lang="en"):
+    def __init__(self, connection_check=True):
+        # Check internet connection
+        if connection_check is True:
+            try:
+                requests.get("https://www.google.com/")
+            except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+                raise NoInternet
+    
+    def detect_lang(self, text):
         """
-        Translator Function
+        Detect language of the provided text
 
-        Argument(s):
-            text - Source Text (Text that need to be translated)
-            dest_lang - Destination Language
-
-        Example(s):
-            pytranslator.translate(text="Hi, How are you?", dest_lang="si")
+        Arguments:
+            text: Text that needs to be detected
         """
-        if self.provider == "google":
-            return self.google_translate(text, dest_lang)
-        elif self.provider == "libre":
-            raise DeprecatedMethod(
-                "Libre is no longer supported as it's translation accuracy is low")
-            # return self.libre_translate(text, dest_lang)
-        elif self.provider == "translate.com":
-            return self.translate_com(text, dest_lang)
-        elif self.provider == "my_memory":
-            return self.my_memory(text, dest_lang)
-        elif self.provider == "translate_dict":
-            return self.translate_dict(text, dest_lang)
+        resp = requests.post(
+            "https://www.translate.com/translator/ajax_lang_auto_detect", data={"text_to_translate": str(text)}).json()
+        if resp["result"] == "success":
+            return resp["language"]
         else:
-            return
+            raise UnknownError
 
-    # Google Translate
-    def google_translate(self, text, dest_lang):
-        r_url = f"https://clients5.google.com/translate_a/t?client=at&sl=auto&tl={dest_lang}&q={text}"
+    
+    def google(self, text, dest):
+        """
+        Translate text using Google Translate
+
+        Arguments:
+            text: Text that needs to be translated
+            dest: The language that the text needs to be translated into
+        """
         try:
-            resp = requests.get(r_url).json()[0]
-            translation = resp[0]
-            origin_lang = self.get_lang_name(resp[1])
-            dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "Google Translate", "translation": translation,
-                       "dest_lang": dest_lang_f, "orgin_text": text, "origin_lang": origin_lang}
-            return tr_dict
+            resp = requests.get(
+                f"https://clients5.google.com/translate_a/t?client=at&sl=auto&tl={dest}&q={text}").json()[0]
+            out = {"status": "success", "engine": "Google Translate", "translation": resp[0],
+                       "dest": dest, "orgin": text, "origin_lang": resp[1]}
+            return out
         except Exception as e:
-            return {"status": "failed", "error": e}
+            raise UnableToTranslate(e)
+    
+    def translate_com(self, text, dest):
+        """
+        Translate text using translate.com
 
-    # LibreTranslate
-    def _detect_lang(self, text, full_name=False):
+        Arguments:
+            text: Text that needs to be translated
+            dest: The language that the text needs to be translated into
+        """
         try:
-            r_url = requests.post("https://libretranslate.com/detect",
-                                  data={"q": str(text)}, headers=self.lheader).json()
-            language_code = r_url[0]["language"]
-        except:
-            # If can't detect the language let's think it's just english (RIP moment)
-            language_code = "en"
-        if full_name is False:
-            return language_code
-        else:
-            return self.get_lang_name(language_code)
-
-    def libre_translate(self, text, dest_lang):
-        try:
-            source_lang = self._detect_lang(text=text, full_name=False)
-            r_url = requests.post("https://libretranslate.com/translate", data={"q": str(
-                text), "source": source_lang, "target": dest_lang}, headers=self.lheader).json()
-            translation = r_url["translatedText"]
-            origin_lang = self.get_lang_name(source_lang)
-            dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "LibreTranslate", "translation": translation,
-                       "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
-            return tr_dict
+            origin_lang = self.detect_lang(text)
+            resp = requests.post(
+                "https://www.translate.com/translator/ajax_translate", 
+                data={"text_to_translate": str(text), "source_lang": origin_lang, "translated_lang": dest, "use_cache_only": "false"}).json()
+            out = {"status": "success", "engine": "Translate.com", "translation": resp["translated_text"],
+                       "dest": dest, "orgin": text, "origin_lang": origin_lang}
+            return out
         except Exception as e:
-            return {"status": "failed", "error": e}
+            raise UnableToTranslate(e)
+    
+    def my_memory(self, text, dest):
+        """
+        Translate text using My Memory
 
-    # Translate.com
-    def translate_com(self, text, dest_lang):
+        Arguments:
+            text: Text that needs to be translated
+            dest: The language that the text needs to be translated into
+        """
         try:
-            source_lang = self._detect_lang(text=text, full_name=False)
-            r_url = requests.post(url="https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(
-                text), "source_lang": source_lang, "translated_lang": dest_lang, "use_cache_only": "false"}).json()
-            translation = r_url["translated_text"]
-            origin_lang = self.get_lang_name(source_lang)
-            dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "Translate.com", "translation": translation,
-                       "dest_lang": dest_lang_f, "orgin_text": origin_lang, "origin_lang": origin_lang}
-            return tr_dict
+            origin_lang = self.detect_lang(text)
+            resp = requests.get(
+                "https://api.mymemory.translated.net/get", 
+                params={"q": text, "langpair": f"{origin_lang}|{dest}"}).json()
+            out = {"status": "success", "engine": "My Memory", "translation": resp["matches"][0]["translation"],
+                       "dest": dest, "orgin": text, "origin_lang": origin_lang}
+            return out
         except Exception as e:
-            return {"status": "failed", "error": e}
+            raise UnableToTranslate(e)
+    
+    def translate_dict(self, text, dest, detect_origin=False):
+        """
+        Translate text using Translate Dict
 
-    # My Memory
-    def my_memory(self, text, dest_lang):
+        Arguments:
+            text: Text that needs to be translated
+            dest: The language that the text needs to be translated into
+            detect_origin: Pass "True" to detect origin language. Defaults to "False"
+        """
         try:
-            source_lang = self._detect_lang(text=text, full_name=False)
-            r_url = requests.get("https://api.mymemory.translated.net/get", params={
-                                 "q": text, "langpair": f"{source_lang}|{dest_lang}"}).json()
-            translation = r_url["matches"][0]["translation"]
-            origin_lang = self.get_lang_name(source_lang)
-            dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "MyMemory", "translation": translation,
-                       "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
-            return tr_dict
-        except Exception as e:
-            return {"status": "failed", "error": e}
-
-    # Translate Dict
-    def translate_dict(self, text, dest_lang):
-        try:
-            r_url = requests.get(
-                f"https://t3.translatedict.com/1.php?p1=auto&p2={dest_lang}&p3={text}").text
-            origin_lang = self._detect_lang(text=text, full_name=True)
-            dest_lang_f = self.get_lang_name(dest_lang)
-            tr_dict = {"status": "success", "engine": "Translate Dict", "translation": r_url,
-                       "dest_lang": dest_lang_f, "orgin_text": str(text), "origin_lang": origin_lang}
-            return tr_dict
-        except Exception as e:
-            return {"status": "failed", "error": e}
-
-    # Get Language Names
-    def get_lang_name(self, text):
-        if len(text) == 2:
-            return _get_full_lang_name(text)
-        else:
-            if len(text) <= 3:
-                return "Not a full language name"
+            resp = requests.get(
+                f"https://t3.translatedict.com/1.php?p1=auto&p2={dest}&p3={text}").text
+            if detect_origin is True:
+                origin_lang = self.detect_lang(text)
             else:
-                return _get_lang_code(text)
+                origin_lang = None
+            out = {"status": "success", "engine": "Translate Dict", "translation": resp,
+                       "dest": dest, "orgin": text, "origin_lang": origin_lang}
+            return out
+        except Exception as e:
+            return UnableToTranslate(e)
