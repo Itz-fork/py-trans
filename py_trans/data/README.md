@@ -1,0 +1,2 @@
+- [version.json](/version.json) - Contains the version of library
+- [languages.json](/languages.json) - Contains ISO 639-1 language codes (compiled from wikipedia by @josantonius)
