@@ -13,7 +13,7 @@ class PyTranslator:
 
     Methods:
 
-        detect_lang: Detect language of the provided text
+        detect: Detect language of the provided text
         google: Translate text using Google Translate
         translate_com: Translate text using Translate.com
         my_memory: Translate text using My Memory
@@ -27,7 +27,7 @@ class PyTranslator:
             except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
                 raise NoInternet
     
-    def detect_lang(self, text):
+    def detect(self, text):
         """
         Detect language of the provided text
 
@@ -68,7 +68,7 @@ class PyTranslator:
             dest: The language that the text needs to be translated into
         """
         try:
-            origin_lang = self.detect_lang(text)
+            origin_lang = self.detect(text)
             resp = requests.post(
                 "https://www.translate.com/translator/ajax_translate", 
                 data={"text_to_translate": str(text), "source_lang": origin_lang, "translated_lang": dest, "use_cache_only": "false"}).json()
@@ -87,7 +87,7 @@ class PyTranslator:
             dest: The language that the text needs to be translated into
         """
         try:
-            origin_lang = self.detect_lang(text)
+            origin_lang = self.detect(text)
             resp = requests.get(
                 "https://api.mymemory.translated.net/get", 
                 params={"q": text, "langpair": f"{origin_lang}|{dest}"}).json()
@@ -110,7 +110,7 @@ class PyTranslator:
             resp = requests.get(
                 f"https://t3.translatedict.com/1.php?p1=auto&p2={dest}&p3={text}").text
             if detect_origin is True:
-                origin_lang = self.detect_lang(text)
+                origin_lang = self.detect(text)
             else:
                 origin_lang = None
             out = {"status": "success", "engine": "Translate Dict", "translation": resp,

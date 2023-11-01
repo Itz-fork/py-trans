@@ -13,7 +13,7 @@ class Async_PyTranslator:
 
     Methods:
 
-        detect_lang: Detect language of the provided text
+        detect: Detect language of the provided text
         google: Translate text using Google Translate
         translate_com: Translate text using Translate.com
         my_memory: Translate text using My Memory
@@ -27,7 +27,7 @@ class Async_PyTranslator:
             except (exceptions.ConnectionError, exceptions.Timeout):
                 raise NoInternet
     
-    async def detect_lang(self, text):
+    async def detect(self, text):
         """
         Detect language of the provided text
 
@@ -70,7 +70,7 @@ class Async_PyTranslator:
             dest: The language that the text needs to be translated into
         """
         try:
-            origin_lang = await self.detect_lang(text)
+            origin_lang = await self.detect(text)
             async with ClientSession() as client:
                 async with client.post("https://www.translate.com/translator/ajax_translate", data={"text_to_translate": str(text), "source_lang": origin_lang, "translated_lang": dest, "use_cache_only": "false"}) as fetch:
                     resp = await fetch.json()
@@ -89,7 +89,7 @@ class Async_PyTranslator:
             dest: The language that the text needs to be translated into
         """
         try:
-            origin_lang = self.detect_lang(text)
+            origin_lang = self.detect(text)
             async with ClientSession() as client:
                 async with client.get("https://api.mymemory.translated.net/get", params={"q": text, "langpair": f"{origin_lang}|{dest}"}) as fetch:
                     resp = await fetch.json()
@@ -113,7 +113,7 @@ class Async_PyTranslator:
                 async with client.get(f"https://t3.translatedict.com/1.php?p1=auto&p2={dest}&p3={text}") as fetch:
                     resp = await fetch.text()
                     if detect_origin is True:
-                        origin_lang = self.detect_lang(text)
+                        origin_lang = self.detect(text)
                     else:
                         origin_lang = None
                     out = {"status": "success", "engine": "Translate Dict", "translation": resp,
