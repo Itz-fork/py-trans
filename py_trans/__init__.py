@@ -14,3 +14,4 @@ __version__ = get_version()
 
 from .translator import PyTranslator
 from .async_translator import Async_PyTranslator
+from .extras import get_lang_code, get_lang_name
