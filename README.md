@@ -87,9 +87,20 @@ from py_trans import Async_PyTranslator
         ```py
         tr.translate_dict("Hello!", "es")
         ```
+- Get language code/name
+    - 
+        ```py
+        # Sync version
+        tr.get_lang_code("arabic")
+        tr.get_lang_name("ar")
+
+        # Async version
+        tr.get_lang_code_async("arabic")
+        tr.get_lang_name_async("ar")
+        ```
 
 > [!NOTE]
-> All the above examples also applies to async version
+> All the above examples also applies to async version (`Async_PyTranslator`)
 
 
 ## License
