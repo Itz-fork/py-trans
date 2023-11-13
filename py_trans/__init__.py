@@ -5,10 +5,13 @@
 # Version
 import os, json
 
+
 def get_version():
     with open(f"{os.path.dirname(__file__)}/data/version.json", "r") as jsn_f:
         ver = json.load(jsn_f)
         return ver["version"]
+
+
 __version__ = get_version()
 
 
