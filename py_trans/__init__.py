@@ -1,15 +1,20 @@
-# Copyright (c) 2021 - Itz-fork
-# Project: py_trans
+# Author: https://github.com/Itz-fork
+# Project: https://github.com/Itz-fork/py-trans
+# License: MIT License
 
-import os
-import json
+# Version
+import os, json
 
-# py-trans version
-def get_pytrans_version():
-    with open(f"{os.path.dirname(__file__)}/pytrans_data/version.json", "r") as jsn_f:
+
+def get_version():
+    with open(f"{os.path.dirname(__file__)}/data/version.json", "r") as jsn_f:
         ver = json.load(jsn_f)
         return ver["version"]
-__version__ = get_pytrans_version()
+
+
+__version__ = get_version()
+
 
 from .translator import PyTranslator
 from .async_translator import Async_PyTranslator
+from .extras import get_lang_code, get_lang_name

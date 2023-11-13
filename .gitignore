@@ -1,3 +1,4 @@
 tests/
 dist/
 py_trans.egg-info/
+.venv

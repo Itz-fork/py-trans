@@ -1,24 +1,16 @@
-# Project: py-trans
-# Author: Itz-fork
+# Author: https://github.com/Itz-fork
+# Project: https://github.com/Itz-fork/py-trans
+# License: MIT License
 
-from requests import get, exceptions
 
-
-class NoInternetConnection(Exception):
+class NoInternet(Exception):
+    "Please turn on your internet connection!"
     pass
 
+class UnableToTranslate(Exception):
+    def __init__(self, e):
+        super().__init__({"status": "failed", "error": e})
 
-class UnknownErrorOccurred(Exception):
+class UnknownError(Exception):
+    "Unknown error"
     pass
-
-
-class DeprecatedMethod(Exception):
-    pass
-
-
-def check_internet_connection():
-    try:
-        get("https://www.google.com/")
-    except (exceptions.ConnectionError, exceptions.Timeout):
-        raise NoInternetConnection(
-            "Your device hasn't connected to internet yet! Please turn on the internet connection to keep using py-trans library!")
